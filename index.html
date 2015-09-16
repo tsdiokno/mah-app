@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mah App</title>
+</head>
+<body>
+
+  <h1>mAh.app</h1>
+  <p>Find the best powerbank for your gadget.</p>
+
+  <input type="number" id="capacity">
+
+  <table>
+    <tr>
+      <td>Powerbank1</td>
+      <td>Powerbank2</td>
+      <td>Powerbank3</td>
+    </tr>
+    <tr>
+      <td id="pbank-1">3000</td>
+      <td id="pbank-2">9600</td>
+      <td id="pbank-3">1000</td>
+    </tr>
+  </table>
+
+  <script type="text/javascript">
+
+    var input = document.getElementById('capacity');
+
+    function updateCapacity(){
+
+      var inputCapacity = input.value;
+      console.log(inputCapacity);
+
+      function calculator(pBankCapacity) {
+          var chargeCycles = pBankCapacity.innerText * 0.20 / inputCapacity;
+          console.log(chargeCycles);
+          pBankCapacity.innerText = chargeCycles;
+      }
+
+      var pbank1Val = document.getElementById('pbank-1');
+      calculator(pbank1Val);
+
+      var pbank2Val = document.getElementById('pbank-2');
+      calculator(pbank2Val);
+
+      var pbank3Val = document.getElementById('pbank-3');
+      calculator(pbank3Val);
+
+    }
+
+    input.addEventListener('keydown', updateCapacity, false);
+
+  </script>
+
+</body>
+</html>
