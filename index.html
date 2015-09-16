@@ -30,13 +30,24 @@
 
     function updateCapacity(){
 
-      var inputCapacity = input.value;
-      console.log(inputCapacity);
-
       function calculator(pBankCapacity) {
-          var chargeCycles = pBankCapacity.innerText * 0.20 / inputCapacity;
-          console.log(chargeCycles);
-          pBankCapacity.innerText = chargeCycles;
+
+          console.log('pBankCapacity ' + inputCapacity);
+
+          var inputCapacity = input.value;
+          console.log('inputCapacity ' + inputCapacity);
+
+          var powerLoss = pBankCapacity.innerText * 0.20;
+          console.log('pBankCapacity.innerText ' + pBankCapacity.innerText);
+          console.log('powerLoss ' + powerLoss);
+
+          var powerLossRound = +powerLoss.toFixed(2);
+          console.log('powerLossRound ' + powerLossRound);
+
+          var chargeCycles = powerLossRound / inputCapacity;
+          console.log('chargeCycles ' + chargeCycles);
+
+          pBankCapacity.innerText = +chargeCycles.toFixed(2);
       }
 
       var pbank1Val = document.getElementById('pbank-1');
