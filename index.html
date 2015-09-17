@@ -38,7 +38,8 @@
     var result1 = document.getElementById('pbank-1-result');
 
   function isFloat(value) {
-    if( isNaN(value) || value.indexOf('.') < 0 ){
+    var valueToString = value.toString();
+    if( isNaN(value) || valueToString.indexOf('.') < 0 ){
     return false;
     } else {
       if(parseFloat(value)) {
@@ -58,16 +59,36 @@
         // Calculation
         var getCapacityVal = capacityVal.innerText;
         var practiceCalc = getCapacityVal * 0.20 / inputValue;
-        // var practiceCalcRnd = +practiceCalc;
-        practiceCalcFloat = parseFloat(practiceCalc);
-
-        console.log ('isFloat(practiceCalc) ' + isFloat(practiceCalc));
+        var practiceCalcRnd = +practiceCalc.toFixed(2);
 
         // Conditional displays
-        if ( practiceCalcRnd >= 1 && isFloat(practiceCalcRnd) ) {
-          result1.innerText = practiceCalcRnd.toFixed(0) + ' and more';
+        if ( practiceCalcRnd >= 1 ) {
+          result1.innerText = practiceCalcRnd + ' charge cycles';
         } else {
           result1.innerText = 'up to 1 charge cycle';
+        }
+
+        // Int vs. Float Validator
+
+        practiceCalcToFloat = parseFloat(practiceCalc);
+        console.log('practiceCalcToFloat ' + practiceCalcToFloat);
+        practiceCalcToString = practiceCalc.toString();
+        console.log('practiceCalcToString ' + practiceCalcToString);
+
+        if ( practiceCalcToString.indexOf('.') < 0 ) {
+          console.log('probably an integer (x charge cycles)');
+        }
+
+        if ( practiceCalcToString.indexOf('.') >= 0 ) {
+          console.log('probably a float (x charge cycles and more)');
+        }
+
+        if ( practiceCalcToString >= 1 && practiceCalcToString < 2 ) {
+          console.log('probably a 1 (x charge cycle or more)');
+        }
+
+        if ( practiceCalcToString < 1 ) {
+          console.log('probably zero (up to one charge cycle)');
         }
 
       }
