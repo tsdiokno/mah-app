@@ -22,64 +22,63 @@
       <td id="pbank-2">9600</td>
       <td id="pbank-3">1000</td>
     </tr>
+    <tr>
+      <td id="pbank-1-result">[charge cycles]</td>
+      <td id="pbank-2-result">[charge cycles]</td>
+      <td id="pbank-3-result">[charge cycles]</td>
+    </tr>
   </table>
 
   <script type="text/javascript">
 
     var input = document.getElementById('capacity');
 
-    function updateCapacity(){
+    // Available capacities + results container
+    var capacity1 = document.getElementById('pbank-1');
+    var result1 = document.getElementById('pbank-1-result');
 
-      function calculator(pBankCapacity) {
+  function isFloat(value) {
+    if( isNaN(value) || value.indexOf('.') < 0 ){
+    return false;
+    } else {
+      if(parseFloat(value)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
 
-          console.log('pBankCapacity ' + inputCapacity);
+    function practiceCalcFuncDo () {
 
-          var inputCapacity = parseInt(input.value);
-          console.log('inputCapacity ' + inputCapacity);
+      var inputValue = parseInt(input.value);
 
-          function isInt(pBankCapacity) {
+      function practiceCalcFunc(capacityVal) {
 
-            console.log('isInt ');
+        // Calculation
+        var getCapacityVal = capacityVal.innerText;
+        var practiceCalc = getCapacityVal * 0.20 / inputValue;
+        // var practiceCalcRnd = +practiceCalc;
+        practiceCalcFloat = parseFloat(practiceCalc);
 
-            var powerLoss = pBankCapacity.innerText * 0.20;
-            console.log('pBankCapacity.innerText ' + pBankCapacity.innerText);
-            console.log('powerLoss ' + powerLoss);
+        console.log ('isFloat(practiceCalc) ' + isFloat(practiceCalc));
 
-            var powerLossRound = +powerLoss.toFixed(2);
-            console.log('powerLossRound ' + powerLossRound);
-
-            var chargeCycles = powerLossRound / inputCapacity;
-            console.log('chargeCycles ' + chargeCycles);
-
-            pBankCapacity.innerText = +chargeCycles.toFixed(2);
-
-          }
+        // Conditional displays
+        if ( practiceCalcRnd >= 1 && isFloat(practiceCalcRnd) ) {
+          result1.innerText = practiceCalcRnd.toFixed(0) + ' and more';
+        } else {
+          result1.innerText = 'up to 1 charge cycle';
+        }
 
       }
 
-      var pbank1Val = document.getElementById('pbank-1');
-      // calculator(pbank1Val);
-
-      //var pbank2Val = document.getElementById('pbank-2');
-      //calculator(pbank2Val);
-
-      //var pbank3Val = document.getElementById('pbank-3');
-      //calculator(pbank3Val);
+      if ( Number.isInteger(inputValue) ) { // check if input is int
+        practiceCalcFunc(capacity1);
+      }
 
     }
 
-    // input.addEventListener('keydown', updateCapacity, false);
-
-    function practiceCalcFunc() {
-      var inputValue = input.value;
-      console.log('inputValue ' + inputValue);
-      var practiceCalc = 11000 * 0.20 / inputValue;
-      console.log('practiceCalc ' + practiceCalc);
-      var practiceCalcRnd = +practiceCalc.toFixed(2);
-      console.log('practiceCalcRnd ' + practiceCalcRnd);
-    }
-
-    input.addEventListener('keyup', practiceCalcFunc, false);
+    input.addEventListener('keyup', practiceCalcFuncDo, false);
 
   </script>
 
