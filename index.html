@@ -70,26 +70,80 @@
 
         // Int vs. Float Validator
 
+        // String Concotion
         practiceCalcToFloat = parseFloat(practiceCalc);
         console.log('practiceCalcToFloat ' + practiceCalcToFloat);
         practiceCalcToString = practiceCalc.toString();
         console.log('practiceCalcToString ' + practiceCalcToString);
 
-        if ( practiceCalcToString.indexOf('.') < 0 ) {
-          console.log('probably an integer (x charge cycles)');
+        // Operators
+
+        /* if ( practiceCalcToString.indexOf('.') < 0 ) { // resultIsInteger
+          console.log('an integer (x charge cycles)');
+          return true;
+        } else {
+          return false;
+        } */
+
+        function resultIsInteger (calcResult) {
+          if ( calcResult.indexOf('.') < 0 ) { // resultIsInteger
+            console.log('an integer (x charge cycles)');
+            return true;
+          } else {
+            return false;
+          }
         }
 
-        if ( practiceCalcToString.indexOf('.') >= 0 ) {
-          console.log('probably a float (x charge cycles and more)');
-        }
+        /* if ( practiceCalcToString.indexOf('.') >= 0 ) { // resultIsFloat
+          console.log('a float (x charge cycles and more)');
+          return true;
+        } else {
+          return false;
+        } */
 
-        if ( practiceCalcToString >= 1 && practiceCalcToString < 2 ) {
-          console.log('probably a 1 (x charge cycle or more)');
-        }
+        function resultIsFloat (calcResult) {
+          if ( calcResult.indexOf('.') >= 0 ) {
+            console.log('a float (x charge cycles and more)');
+            return true;
+          } else {
+            return false;
+          }
+        } // resultIsFloat
 
-        if ( practiceCalcToString < 1 ) {
-          console.log('probably zero (up to one charge cycle)');
-        }
+        /* if ( practiceCalcToString >= 1 && practiceCalcToString < 2 ) { // resultIsSingular
+          console.log('a 1-point-something (x charge cycle or more)');
+          return true;
+        } else {
+          return false;
+        } */
+
+        function resultIsSingular (calcResult) {
+          if ( calcResult >= 1 && calcResult < 2 ) {
+            console.log('a 1-point-something (x charge cycle or more)');
+            return true;
+          } else {
+            return false;
+          }
+        } // resultIsSingular
+
+        /* if ( practiceCalcToString < 1 ) { // resultIsZero
+          console.log('a zero-point-something (up to one charge cycle)');
+          return true;
+        } else {
+          return false;
+        } */
+
+        function resultIsZero(calcResult) {
+          if ( calcResult < 1 ) {
+            console.log('a zero-point-something (up to one charge cycle)');
+            return true;
+          } else {
+            return false;
+          }
+        } // resultIsZero
+
+        // Validator
+
 
       }
 
