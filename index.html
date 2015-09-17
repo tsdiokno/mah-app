@@ -34,34 +34,52 @@
 
           console.log('pBankCapacity ' + inputCapacity);
 
-          var inputCapacity = input.value;
+          var inputCapacity = parseInt(input.value);
           console.log('inputCapacity ' + inputCapacity);
 
-          var powerLoss = pBankCapacity.innerText * 0.20;
-          console.log('pBankCapacity.innerText ' + pBankCapacity.innerText);
-          console.log('powerLoss ' + powerLoss);
+          function isInt(pBankCapacity) {
 
-          var powerLossRound = +powerLoss.toFixed(2);
-          console.log('powerLossRound ' + powerLossRound);
+            console.log('isInt ');
 
-          var chargeCycles = powerLossRound / inputCapacity;
-          console.log('chargeCycles ' + chargeCycles);
+            var powerLoss = pBankCapacity.innerText * 0.20;
+            console.log('pBankCapacity.innerText ' + pBankCapacity.innerText);
+            console.log('powerLoss ' + powerLoss);
 
-          pBankCapacity.innerText = +chargeCycles.toFixed(2);
+            var powerLossRound = +powerLoss.toFixed(2);
+            console.log('powerLossRound ' + powerLossRound);
+
+            var chargeCycles = powerLossRound / inputCapacity;
+            console.log('chargeCycles ' + chargeCycles);
+
+            pBankCapacity.innerText = +chargeCycles.toFixed(2);
+
+          }
+
       }
 
       var pbank1Val = document.getElementById('pbank-1');
-      calculator(pbank1Val);
+      // calculator(pbank1Val);
 
-      var pbank2Val = document.getElementById('pbank-2');
-      calculator(pbank2Val);
+      //var pbank2Val = document.getElementById('pbank-2');
+      //calculator(pbank2Val);
 
-      var pbank3Val = document.getElementById('pbank-3');
-      calculator(pbank3Val);
+      //var pbank3Val = document.getElementById('pbank-3');
+      //calculator(pbank3Val);
 
     }
 
-    input.addEventListener('keydown', updateCapacity, false);
+    // input.addEventListener('keydown', updateCapacity, false);
+
+    function practiceCalcFunc() {
+      var inputValue = input.value;
+      console.log('inputValue ' + inputValue);
+      var practiceCalc = 11000 * 0.20 / inputValue;
+      console.log('practiceCalc ' + practiceCalc);
+      var practiceCalcRnd = +practiceCalc.toFixed(2);
+      console.log('practiceCalcRnd ' + practiceCalcRnd);
+    }
+
+    input.addEventListener('keyup', practiceCalcFunc, false);
 
   </script>
 
