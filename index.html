@@ -160,30 +160,30 @@
       console.log('calcResult ' + calcResult);
       console.log(calcResult.indexOf('.'));
 
-      if ( calcResult < 0.8 ) {
+      if ( calcResult < 0.8 ) { // less than 0.8
 
         console.log('less than 1 cycle');
 
-      } else if ( calcResult >= 0.8 ) {
+      } else if ( calcResult >= 0.8 && calcResult < 1 ) { // more than 0.8 but less than 1
 
         console.log('about 1 cycle');
 
-      } else if ( calcResult.indexOf('.') < 0 && calcResult < 2 ) {
+      } else if ( calcResult.indexOf('.') < 0 && calcResult < 2 ) { // no decimal but just 1
 
         console.log('withDecimal false | up to ' + calcResult + ' cycle OR more');
 
-      } else if ( calcResult.indexOf('.') < 0 && calcResult >= 2 ) {
+      } else if ( calcResult.indexOf('.') < 0 && calcResult >= 2 ) { // no decimal and more than 1
 
         console.log('withDecimal false | up to ' + calcResult + ' cycles OR more');
 
       } else {
 
-        console.log('withDecimal true');
+        console.log('withDecimal true'); // must be with decimal
 
-        var indexOfDecimal = calcResult.indexOf('.');
-        var numAfterDecimal = calcResult.charAt(indexOfDecimal + 1);
+        var indexOfDecimal = calcResult.indexOf('.'); // look for decimal index
+        var numAfterDecimal = calcResult.charAt(indexOfDecimal + 1); // number after decimal
 
-        if ( numAfterDecimal >= 8 && numAfterDecimal > 0 ) {
+        if ( numAfterDecimal >= 8 ) { // number after decimal is more than or equal to 8
           console.log('numAfterDecimal is more than or equal to 8 | up to ' + Math.floor(calcResult) + ' cycles AND more');
         } else {
           console.log('numAfterDecimal is less than 8 | up to ' + Math.floor(calcResult) + ' cycles OR more');
@@ -193,7 +193,7 @@
 
     }
 
-    var sampleRawInput = 0.78993652;
+    var sampleRawInput = 12345.1989656;
     var sampleRoundedInput  = +sampleRawInput.toFixed(1);
     var sampleResult= sampleRoundedInput.toString();
     //console.log('sampleResult ' + sampleResult);
