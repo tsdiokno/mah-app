@@ -7,11 +7,13 @@
 <body>
 
   <h1>mAh.app</h1>
-  <p>Find the best powerbank for your gadget.</p>
+  <p>Powerbank charging cycle calculator.</p>
 
-  <input type="number" value="2800" id="gadget-capacity">
+  <input type="number" id="gadget-capacity" placeholder="9000">
 
-  <p id="pbank1-capacity">3000</p>
+  <input type="number" value="3000" id="pbank1-capacity" readonly>
+
+  <!--<p id="pbank1-capacity">3000</p>-->
   <p id="pbank1-result">[charge cycles 1]</p>
 
   <script type="text/javascript">
@@ -32,7 +34,7 @@
 
         console.log('getMahCycles!');
 
-        var pBank1Capacity = myIdentityIs('pbank1-capacity').innerText;
+        var pBank1Capacity = myIdentityIs('pbank1-capacity').value;
         console.log('bank1Capacity ' + pBank1Capacity);
 
         // RAW CALCULATE
