@@ -78,64 +78,47 @@
 
         // Operators
 
-        /* if ( practiceCalcToString.indexOf('.') < 0 ) { // resultIsInteger
-          console.log('an integer (x charge cycles)');
-          return true;
-        } else {
-          return false;
-        } */
-
-        function resultIsInteger (calcResult) {
+        /* function resultIsInteger (calcResult) {
           if ( calcResult.indexOf('.') < 0 ) { // resultIsInteger
             console.log('an integer (x charge cycles)');
             return true;
           } else {
             return false;
           }
-        }
-
-        /* if ( practiceCalcToString.indexOf('.') >= 0 ) { // resultIsFloat
-          console.log('a float (x charge cycles and more)');
-          return true;
-        } else {
-          return false;
         } */
 
-        function resultIsFloat (calcResult) {
-          if ( calcResult.indexOf('.') >= 0 ) {
-            console.log('a float (x charge cycles and more)');
-            return true;
-          } else {
+        /* function withDecimal (calcResult) {
+          console.log('calcResult ' + calcResult);
+          console.log(calcResult.indexOf('.'));
+          if ( calcResult.indexOf('.') < 0 ) {
+            console.log('withDecimal false');
             return false;
+          } else {
+            return true;
+            console.log('withDecimal true');
+            var indexOfDecimal = calcResult.indexOf('.');
+            var numAfterDecimal = indexOfDecimal + 1;
+
+            if ( numAfterDecimal >= 6 ) {
+              console.log('numAfterDecimal is more than or equal to 6');
+            }
+
           }
-        } // resultIsFloat
+        } */ // resultIsFloat
 
-        /* if ( practiceCalcToString >= 1 && practiceCalcToString < 2 ) { // resultIsSingular
-          console.log('a 1-point-something (x charge cycle or more)');
-          return true;
-        } else {
-          return false;
-        } */
 
-        function resultIsSingular (calcResult) {
+
+        function resultIsSingular(calcResult) {
           if ( calcResult >= 1 && calcResult < 2 ) {
-            console.log('a 1-point-something (x charge cycle or more)');
             return true;
           } else {
             return false;
           }
         } // resultIsSingular
 
-        /* if ( practiceCalcToString < 1 ) { // resultIsZero
-          console.log('a zero-point-something (up to one charge cycle)');
-          return true;
-        } else {
-          return false;
-        } */
 
         function resultIsZero(calcResult) {
           if ( calcResult < 1 ) {
-            console.log('a zero-point-something (up to one charge cycle)');
             return true;
           } else {
             return false;
@@ -144,6 +127,17 @@
 
         // Validator
 
+        /* if ( withDecimal(sampleResult) ){
+          console.log(withDecimal(sampleResult) +' a float (x charge cycles and more)');
+        }
+
+        if ( resultIsSingular(sampleResult) ){
+          console.log('a 1-point-something (x charge cycle or more)');
+        }
+
+        if ( resultIsZero(sampleResult) ) {
+          console.log('a zero-point-something (up to one charge cycle)');
+        } */
 
       }
 
@@ -153,7 +147,59 @@
 
     }
 
-    input.addEventListener('keyup', practiceCalcFuncDo, false);
+    // input.addEventListener('keyup', practiceCalcFuncDo, false);
+
+    /*
+
+    Calculation value
+      1.) Make sure they're conveted to strings before passing them to the interpreter
+      2.) not before num.toFixed(2)
+    */
+
+    function withDecimal (calcResult) {
+      console.log('calcResult ' + calcResult);
+      console.log(calcResult.indexOf('.'));
+
+      if ( calcResult < 0.8 ) {
+
+        console.log('less than 1 cycle');
+
+      } else if ( calcResult >= 0.8 ) {
+
+        console.log('about 1 cycle');
+
+      } else if ( calcResult.indexOf('.') < 0 && calcResult < 2 ) {
+
+        console.log('withDecimal false | up to ' + calcResult + ' cycle OR more');
+
+      } else if ( calcResult.indexOf('.') < 0 && calcResult >= 2 ) {
+
+        console.log('withDecimal false | up to ' + calcResult + ' cycles OR more');
+
+      } else {
+
+        console.log('withDecimal true');
+
+        var indexOfDecimal = calcResult.indexOf('.');
+        var numAfterDecimal = calcResult.charAt(indexOfDecimal + 1);
+
+        if ( numAfterDecimal >= 8 && numAfterDecimal > 0 ) {
+          console.log('numAfterDecimal is more than or equal to 8 | up to ' + Math.floor(calcResult) + ' cycles AND more');
+        } else {
+          console.log('numAfterDecimal is less than 8 | up to ' + Math.floor(calcResult) + ' cycles OR more');
+        }
+
+      }
+
+    }
+
+    var sampleRawInput = 0.78993652;
+    var sampleRoundedInput  = +sampleRawInput.toFixed(1);
+    var sampleResult= sampleRoundedInput.toString();
+    //console.log('sampleResult ' + sampleResult);
+    //console.log('sampleResult.indexOf the dot ' + sampleResult.indexOf('.'));
+
+    withDecimal(sampleResult);
 
   </script>
 
