@@ -26,74 +26,82 @@
       var gadgetCapacity = myIdentityIs('gadget-capacity').value;
       console.log('gadgetCapacity ' + gadgetCapacity);
 
-      var pBank1Capacity = myIdentityIs('pbank1-capacity').innerText;
-      console.log('bank1Capacity ' + pBank1Capacity);
+      if ( gadgetCapacity > 0 )  {
+        console.log('getMahCycles!');
+        var pBank1Capacity = myIdentityIs('pbank1-capacity').innerText;
+        console.log('bank1Capacity ' + pBank1Capacity);
 
-      var pBank1Result = (pBank1Capacity * 0.8) / gadgetCapacity; // power loss of 20% on transfer
-      console.log('pBank1Result ' + pBank1Result);
+        var pBank1Result = (pBank1Capacity * 0.8) / gadgetCapacity; // power loss of 20% on transfer
+        console.log('pBank1Result ' + pBank1Result);
 
-      var resultRounded = pBank1Result.toFixed(1);
-      console.log('resultRounded ' + resultRounded);
+        var resultRounded = pBank1Result.toFixed(1);
+        console.log('resultRounded ' + resultRounded);
 
-      var resultToString = resultRounded.toString(); // analyzer-eligible result
-      console.log('resultToString ' + resultToString);
+        var resultToString = resultRounded.toString(); // analyzer-eligible result
+        console.log('resultToString ' + resultToString);
 
-      /* ---------------------------------------------------------
+        var resultDisplay = myIdentityIs('pbank1-result'); // result display destination
 
-      RESULT ANALYZER (DON'T TOUCH - DONE!)
+        /* ---------------------------------------------------------
 
-      Before passing raw calculation results through the function...
-      2.) round them off to n.toFixed(1).
-        1.) make sure they're toString(n) before passing them to the analyzer;
+        RESULT ANALYZER (DON'T TOUCH - DONE!)
 
-      ----------------------------------------------------------- */
+        Before passing raw calculation results through the function...
+        2.) round them off to n.toFixed(1).
+          1.) make sure they're toString(n) before passing them to the analyzer;
 
-      function analyzeResult(calcResult) {
-        console.log('calcResult ' + calcResult);
-        console.log(calcResult.indexOf('.'));
+        ----------------------------------------------------------- */
 
-        var resultDisplay = myIdentityIs('pbank1-result');
+        function analyzeResult(calcResult) {
+          console.log('calcResult ' + calcResult);
+          console.log(calcResult.indexOf('.'));
 
-        if ( calcResult < 0.8 ) { // less than 0.8
+          if ( calcResult < 0.8 ) { // less than 0.8
 
-          resultDisplay.textContent = 'less than 1 cycle';
-          console.log('less than 1 cycle | and resultDisplay.textContent (2) ' + resultDisplay.textContent);
+            resultDisplay.textContent = 'less than 1 cycle';
+            console.log('less than 1 cycle | and resultDisplay.textContent (2) ' + resultDisplay.textContent);
 
-        } else if ( calcResult >= 0.8 && calcResult < 1 ) { // more than 0.8 but less than 1
+          } else if ( calcResult >= 0.8 && calcResult < 1 ) { // more than 0.8 but less than 1
 
-          resultDisplay.textContent = 'a little less than 1 cycle';
-          console.log('a little less than 1 cycle');
+            resultDisplay.textContent = 'a little less than 1 cycle';
+            console.log('a little less than 1 cycle');
 
-        } else if ( calcResult.indexOf('.') < 0 && calcResult < 2 ) { // no decimal but just 1
+          } else if ( calcResult.indexOf('.') < 0 && calcResult < 2 ) { // no decimal but just 1
 
-          resultDisplay.textContent = 'up to ' + calcResult + ' cycle OR more';
-          console.log('withDecimal false | up to ' + calcResult + ' cycle OR more');
+            resultDisplay.textContent = 'up to ' + calcResult + ' cycle OR more';
+            console.log('withDecimal false | up to ' + calcResult + ' cycle OR more');
 
-        } else if ( calcResult.indexOf('.') < 0 && calcResult >= 2 ) { // no decimal and more than 1
+          } else if ( calcResult.indexOf('.') < 0 && calcResult >= 2 ) { // no decimal and more than 1
 
-          resultDisplay.textContent = 'up to ' + calcResult + ' cycles OR more';
-          console.log('withDecimal false | up to ' + calcResult + ' cycles OR more');
+            resultDisplay.textContent = 'up to ' + calcResult + ' cycles OR more';
+            console.log('withDecimal false | up to ' + calcResult + ' cycles OR more');
 
-        } else {
-
-          console.log('withDecimal true'); // must be with decimal
-
-          var indexOfDecimal = calcResult.indexOf('.'); // look for decimal index
-          var numAfterDecimal = calcResult.charAt(indexOfDecimal + 1); // number after decimal
-
-          if ( numAfterDecimal >= 8 ) { // number after decimal is more than or equal to 8
-            resultDisplay.textContent = 'up to ' + Math.floor(calcResult) + ' cycles AND more';
-            console.log('numAfterDecimal is more than or equal to 8 | up to ' + Math.floor(calcResult) + ' cycles AND more');
           } else {
-            resultDisplay.textContent = 'up to ' + Math.floor(calcResult) + ' cycles OR more';
-            console.log('numAfterDecimal is less than 8 | up to ' + Math.floor(calcResult) + ' cycles OR more');
-          }
 
-        } //else
+            console.log('withDecimal true'); // must be with decimal
 
-      } //analyzeResult
+            var indexOfDecimal = calcResult.indexOf('.'); // look for decimal index
+            var numAfterDecimal = calcResult.charAt(indexOfDecimal + 1); // number after decimal
 
-      analyzeResult(resultToString);
+            if ( numAfterDecimal >= 8 ) { // number after decimal is more than or equal to 8
+              resultDisplay.textContent = 'up to ' + Math.floor(calcResult) + ' cycles AND more';
+              console.log('numAfterDecimal is more than or equal to 8 | up to ' + Math.floor(calcResult) + ' cycles AND more');
+            } else {
+              resultDisplay.textContent = 'up to ' + Math.floor(calcResult) + ' cycles OR more';
+              console.log('numAfterDecimal is less than 8 | up to ' + Math.floor(calcResult) + ' cycles OR more');
+            }
+
+          } //else
+
+        } //analyzeResult
+
+        analyzeResult(resultToString);
+
+      } else {
+
+        console.log('Do not GetMahCycles');
+
+      } // validate gadgetCapacity input to prevent 'infinity' returns
 
     } //getMahCycles
 
