@@ -9,154 +9,65 @@
   <h1>mAh.app</h1>
   <p>Find the best powerbank for your gadget.</p>
 
-  <input type="number" id="capacity">
+  <input type="number" value="2500" id="gadget-capacity">
 
   <table>
+    <thead>
+      <tr>
+        <td>Powerbank 1</td>
+        <td>Powerbank 2</td>
+        <td>Powerbank 3</td>
+      </tr>
+    </thead>
     <tr>
-      <td>Powerbank1</td>
-      <td>Powerbank2</td>
-      <td>Powerbank3</td>
+      <td id="pbank1-capacity">3000</td>
+      <td id="pbank2-capacity">9600</td>
+      <td id="pbank3-capacity">1000</td>
     </tr>
     <tr>
-      <td id="pbank-1">3000</td>
-      <td id="pbank-2">9600</td>
-      <td id="pbank-3">1000</td>
-    </tr>
-    <tr>
-      <td id="pbank-1-result">[charge cycles]</td>
-      <td id="pbank-2-result">[charge cycles]</td>
-      <td id="pbank-3-result">[charge cycles]</td>
+      <td id="pbank1-result">[charge cycles]</td>
+      <td id="pbank2-result">[charge cycles]</td>
+      <td id="pbank3-result">[charge cycles]</td>
     </tr>
   </table>
 
   <script type="text/javascript">
 
-    var input = document.getElementById('capacity');
-
-    // Available capacities + results container
-    var capacity1 = document.getElementById('pbank-1');
-    var result1 = document.getElementById('pbank-1-result');
-
-  function isFloat(value) {
-    var valueToString = value.toString();
-    if( isNaN(value) || valueToString.indexOf('.') < 0 ){
-    return false;
-    } else {
-      if(parseFloat(value)) {
-        return true;
-      } else {
-        return false;
-      }
+    function myIdentityIs(elementID) {
+      console.log('myIdentityIs ' + elementID);
+      return document.getElementById(elementID);
     }
-  }
 
-    function practiceCalcFuncDo () {
+    var gadgetCapacity = myIdentityIs('gadget-capacity').value;
+    console.log('gadgetCapacity ' + gadgetCapacity);
 
-      var inputValue = parseInt(input.value);
+    var pBank1Capacity = myIdentityIs('pbank1-capacity').innerText;
+    console.log('bank1Capacity ' + pBank1Capacity);
 
-      function practiceCalcFunc(capacityVal) {
+    var pBank1Result = (pBank1Capacity * 0.2) / gadgetCapacity;
+    console.log('pBank1Result ' + pBank1Result);
 
-        // Calculation
-        var getCapacityVal = capacityVal.innerText;
-        var practiceCalc = getCapacityVal * 0.20 / inputValue;
-        var practiceCalcRnd = +practiceCalc.toFixed(2);
+    var resultRounded = pBank1Result.toFixed(1);
+    console.log('resultRounded ' + resultRounded);
 
-        // Conditional displays
-        if ( practiceCalcRnd >= 1 ) {
-          result1.innerText = practiceCalcRnd + ' charge cycles';
-        } else {
-          result1.innerText = 'up to 1 charge cycle';
-        }
+    var resultToString = resultRounded.toString(); // analyzer-eligible result
+    console.log('resultToString ' + resultToString);
 
-        // Int vs. Float Validator
-
-        // String Concotion
-        practiceCalcToFloat = parseFloat(practiceCalc);
-        console.log('practiceCalcToFloat ' + practiceCalcToFloat);
-        practiceCalcToString = practiceCalc.toString();
-        console.log('practiceCalcToString ' + practiceCalcToString);
-
-        // Operators
-
-        /* function resultIsInteger (calcResult) {
-          if ( calcResult.indexOf('.') < 0 ) { // resultIsInteger
-            console.log('an integer (x charge cycles)');
-            return true;
-          } else {
-            return false;
-          }
-        } */
-
-        /* function withDecimal (calcResult) {
-          console.log('calcResult ' + calcResult);
-          console.log(calcResult.indexOf('.'));
-          if ( calcResult.indexOf('.') < 0 ) {
-            console.log('withDecimal false');
-            return false;
-          } else {
-            return true;
-            console.log('withDecimal true');
-            var indexOfDecimal = calcResult.indexOf('.');
-            var numAfterDecimal = indexOfDecimal + 1;
-
-            if ( numAfterDecimal >= 6 ) {
-              console.log('numAfterDecimal is more than or equal to 6');
-            }
-
-          }
-        } */ // resultIsFloat
-
-
-
-        function resultIsSingular(calcResult) {
-          if ( calcResult >= 1 && calcResult < 2 ) {
-            return true;
-          } else {
-            return false;
-          }
-        } // resultIsSingular
-
-
-        function resultIsZero(calcResult) {
-          if ( calcResult < 1 ) {
-            return true;
-          } else {
-            return false;
-          }
-        } // resultIsZero
-
-        // Validator
-
-        /* if ( withDecimal(sampleResult) ){
-          console.log(withDecimal(sampleResult) +' a float (x charge cycles and more)');
-        }
-
-        if ( resultIsSingular(sampleResult) ){
-          console.log('a 1-point-something (x charge cycle or more)');
-        }
-
-        if ( resultIsZero(sampleResult) ) {
-          console.log('a zero-point-something (up to one charge cycle)');
-        } */
-
-      }
-
-      if ( Number.isInteger(inputValue) ) { // check if input is int
-        practiceCalcFunc(capacity1);
-      }
-
-    }
 
     // input.addEventListener('keyup', practiceCalcFuncDo, false);
 
-    /*
+    /* ---------------------------------------------------------
 
-    Calculation value
-      1.) Make sure they're conveted to strings before passing them to the interpreter
-      2.) not before num.toFixed(2)
-    */
+    RESULT ANALYZER (DON'T TOUCH - DONE!)
 
-    function withDecimal (calcResult) {
+    Before passing raw calculation results through the function...
+    2.) round them off to n.toFixed(1).
+      1.) make sure they're toString(n) before passing them to the analyzer;
+
+
+    ----------------------------------------------------------- */
+
+    function analyzeResult(calcResult) {
       console.log('calcResult ' + calcResult);
       console.log(calcResult.indexOf('.'));
 
@@ -166,7 +77,7 @@
 
       } else if ( calcResult >= 0.8 && calcResult < 1 ) { // more than 0.8 but less than 1
 
-        console.log('about 1 cycle');
+        console.log('a little less than 1 cycle');
 
       } else if ( calcResult.indexOf('.') < 0 && calcResult < 2 ) { // no decimal but just 1
 
@@ -191,15 +102,10 @@
 
       }
 
-    }
+    } //analyzeResult
 
-    var sampleRawInput = 12345.1989656;
-    var sampleRoundedInput  = +sampleRawInput.toFixed(1);
-    var sampleResult= sampleRoundedInput.toString();
-    //console.log('sampleResult ' + sampleResult);
-    //console.log('sampleResult.indexOf the dot ' + sampleResult.indexOf('.'));
 
-    withDecimal(sampleResult);
+    analyzeResult(resultToString);
 
   </script>
 
