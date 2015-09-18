@@ -26,31 +26,37 @@
       var gadgetCapacity = myIdentityIs('gadget-capacity').value;
       console.log('gadgetCapacity ' + gadgetCapacity);
 
+      var resultDisplay = myIdentityIs('pbank1-result'); // result display destination
+
       if ( gadgetCapacity > 0 )  {
+
         console.log('getMahCycles!');
+
         var pBank1Capacity = myIdentityIs('pbank1-capacity').innerText;
         console.log('bank1Capacity ' + pBank1Capacity);
+
+        // RAW CALCULATE
 
         var pBank1Result = (pBank1Capacity * 0.8) / gadgetCapacity; // power loss of 20% on transfer
         console.log('pBank1Result ' + pBank1Result);
 
-        var resultRounded = pBank1Result.toFixed(1);
+        /* ---------------------------------------------------------
+
+        RESULT ANALYZER
+
+        Before passing raw calculation results through the function...
+          1.) round them off to n.toFixed(1).
+          2.) make sure they're toString(n) before passing them to the analyzer;
+
+        ----------------------------------------------------------- */
+
+        var resultRounded = pBank1Result.toFixed(1); // round-off to a single decimal place
         console.log('resultRounded ' + resultRounded);
 
         var resultToString = resultRounded.toString(); // analyzer-eligible result
         console.log('resultToString ' + resultToString);
 
-        var resultDisplay = myIdentityIs('pbank1-result'); // result display destination
-
-        /* ---------------------------------------------------------
-
-        RESULT ANALYZER (DON'T TOUCH - DONE!)
-
-        Before passing raw calculation results through the function...
-        2.) round them off to n.toFixed(1).
-          1.) make sure they're toString(n) before passing them to the analyzer;
-
-        ----------------------------------------------------------- */
+        // ANALYZER
 
         function analyzeResult(calcResult) {
           console.log('calcResult ' + calcResult);
@@ -83,22 +89,26 @@
             var indexOfDecimal = calcResult.indexOf('.'); // look for decimal index
             var numAfterDecimal = calcResult.charAt(indexOfDecimal + 1); // number after decimal
 
-            if ( numAfterDecimal >= 8 ) { // number after decimal is more than or equal to 8
+            if ( numAfterDecimal >= 7 ) { // number after decimal is more than or equal to 8
               resultDisplay.textContent = 'up to ' + Math.floor(calcResult) + ' cycles AND more';
-              console.log('numAfterDecimal is more than or equal to 8 | up to ' + Math.floor(calcResult) + ' cycles AND more');
+              console.log('numAfterDecimal is more than or equal to 7 | up to (1) ' + Math.floor(calcResult) + ' cycles AND more');
+            } else if ( numAfterDecimal < 7 && calcResult < 2) { // number after decimal is under 8 and is less than 2 (1.xx)
+              resultDisplay.textContent = 'up to ' + Math.floor(calcResult) + ' cycle OR more';
+              console.log('numAfterDecimal is less than 7 (2) | up to ' + Math.floor(calcResult) + ' cycle OR more');
             } else {
               resultDisplay.textContent = 'up to ' + Math.floor(calcResult) + ' cycles OR more';
-              console.log('numAfterDecimal is less than 8 | up to ' + Math.floor(calcResult) + ' cycles OR more');
+              console.log('numAfterDecimal is less than 7 (3) | up to ' + Math.floor(calcResult) + ' cycles OR more');
             }
 
           } //else
 
         } //analyzeResult
 
-        analyzeResult(resultToString);
+        analyzeResult(resultToString); // execute analyzeResult
 
       } else {
 
+        resultDisplay.textContent = 'please enter a valid capacity';
         console.log('Do not GetMahCycles');
 
       } // validate gadgetCapacity input to prevent 'infinity' returns
