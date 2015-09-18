@@ -97,6 +97,9 @@
             } else if ( numAfterDecimal < 7 && calcResult < 2) { // number after decimal is under 8 and is less than 2 (1.xx)
               resultDisplay.textContent = 'up to ' + Math.floor(calcResult) + ' cycle OR more';
               console.log('numAfterDecimal is less than 7 (2) | up to ' + Math.floor(calcResult) + ' cycle OR more');
+            } else if ( numAfterDecimal == 0 ) { // quick foolproofing for zero decimals
+              resultDisplay.textContent = 'up to ' + Math.floor(calcResult) + ' cycles';
+              console.log('numAfterDecimal is less than 7 (3) | up to ' + Math.floor(calcResult) + ' cycles');
             } else {
               resultDisplay.textContent = 'up to ' + Math.floor(calcResult) + ' cycles OR more';
               console.log('numAfterDecimal is less than 7 (3) | up to ' + Math.floor(calcResult) + ' cycles OR more');
