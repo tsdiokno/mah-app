@@ -12,8 +12,25 @@
   <input type="number" id="gadget-capacity" placeholder="1500"> <br>
   <input type="number" id="pbank1-capacity" placeholder="6000">
 
-  <!--<p id="pbank1-capacity">3000</p>-->
   <p id="pbank1-result">waiting...</p>
+
+  <!--
+
+  UI Display Structure
+
+  <div class="powerbank-capacity" data-powerbank-capacity="pb-3000">
+    <form action="">
+      <select name="" id="">
+        <option value=""></option>
+      </select>
+    </form>
+  </div>
+
+  <div class="calculation-result" data-calculation-result="pb-3000">
+
+  </div>
+
+  -->
 
   <script type="text/javascript">
 
@@ -96,6 +113,9 @@
             } else if ( numAfterDecimal < 7 && calcResult < 2) { // number after decimal is under 8 and is less than 2 (1.xx)
               resultDisplay.textContent = 'up to ' + Math.floor(calcResult) + ' cycle OR more';
               console.log('numAfterDecimal is less than 7 (2) | up to ' + Math.floor(calcResult) + ' cycle OR more');
+            } else if ( numAfterDecimal == 0 ) { // quick foolproofing for zero decimals
+              resultDisplay.textContent = 'up to ' + Math.floor(calcResult) + ' cycles';
+              console.log('numAfterDecimal is less than 7 (3) | up to ' + Math.floor(calcResult) + ' cycles');
             } else {
               resultDisplay.textContent = 'up to ' + Math.floor(calcResult) + ' cycles OR more';
               console.log('numAfterDecimal is less than 7 (3) | up to ' + Math.floor(calcResult) + ' cycles OR more');
