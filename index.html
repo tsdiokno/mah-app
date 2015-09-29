@@ -20,10 +20,9 @@
     <div class="capacity-row">
       <input type="text" data-powerbank-capacity="pb-default" placeholder="5000"></input>
       <input type="text"data-calculation-result="pb-default" placeholder="waiting..." readonly></input>
-      <button class="btn-add-row">Add</button>
+      <button id="btn-add-row-default">Add</button>
     </div>
   </div>
-
 
 
   <!--
@@ -152,7 +151,6 @@
     myIdentityIs('pbank1-capacity').addEventListener('keyup', getMahCycles, false); // recalculate and reasses every key-up
 
 
-
     /*
 
       ADD NEW CUSTOM POWERBANK INTERFACE
@@ -162,6 +160,7 @@
     var n = 0;
     var x = 0;
     var z = myClassIs('btn-add-row');
+    var w = myClassIs('btn-delete-row');
 
     var addBtnArrayLength = myClassIs('btn-add-row').length;
     console.log('addBtnArrayLength (start) ' + addBtnArrayLength);
@@ -173,26 +172,34 @@
       // add capacity row and everything in it...
 
       var testDiv = document.createElement('div');
-      testDiv.setAttribute('class', 'capacity-row-' + n);
+      testDiv.setAttribute('id', 'capacity-row-' + n);
 
       var parentDiv = myIdentityIs('capacity-group');
 
       myIdentityIs('capacity-group').appendChild(testDiv, parentDiv);
 
-      testDiv.innerHTML += '<input type="text" data-powerbank-capacity="pb-' + n + '" placeholder="5000"></input>';
-      testDiv.innerHTML += '<input type="text"data-calculation-result="pb-' + n + '" placeholder="waiting..." readonly></input>';
-      testDiv.innerHTML += '<button class="btn-add-row">Add</button>';
+      testDiv.innerHTML += '<input type="text" data-powerbank-capacity="pb-' + n + '" placeholder="5000"></input> ';
+      testDiv.innerHTML += '<input type="text"data-calculation-result="pb-' + n + '" placeholder="waiting..." readonly></input> ';
+      testDiv.innerHTML += '<button class="btn-add-row">Add</button> ';
       testDiv.innerHTML += '<button class="btn-delete-row">Delete</button>';
 
       for ( i = 0; i < z.length ; i++ ) {
         console.log('forloop-arrayIndex ' + i);
         myClassIs('btn-add-row')[i].addEventListener('click', createCapacityRow, false);
+        myClassIs('btn-delete-row')[i].addEventListener('click', function(){
+          /* do {
+            parentDiv.removeChild(this.parentNode);
+          } while (this.parentNode !== null); */
+
+          if (this.parentNode !== null && this.parentNode !== undefined) {
+            parentDiv.removeChild(this.parentNode);
+          }
+        }, false);
       }
 
     }
 
-    myClassIs('btn-add-row')[0].addEventListener('click', createCapacityRow, false);
-
+    myIdentityIs('btn-add-row-default').addEventListener('click', createCapacityRow, false);
 
   </script>
 
